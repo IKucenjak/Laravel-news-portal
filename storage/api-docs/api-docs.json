@@ -1,0 +1,1558 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "News Portal API",
+        "description": "API for News Portal",
+        "contact": {
+            "name": "Your Name",
+            "email": "your@email.com"
+        },
+        "license": {
+            "name": "Your License",
+            "url": "http://your-license-url.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/admin/dashboard": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Retrieve Users for Admin Dashboard",
+                "operationId": "72810f7155756e32eae11b5be0b13129",
+                "responses": {
+                    "200": {
+                        "description": "List of users for the admin dashboard",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "users": [
+                                        {
+                                            "id": 1,
+                                            "name": "John Doe",
+                                            "email": "john.doe@example.com",
+                                            "role": "admin"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "name": "Jane Doe",
+                                            "email": "jane.doe@example.com",
+                                            "role": "user"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/edit-user/{userId}": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Edit User Information",
+                "operationId": "1abced9ae097af082f2dde7e3a848872",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of the user to edit",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Edit user view",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "user": {
+                                        "id": 1,
+                                        "name": "John Doe",
+                                        "email": "john.doe@example.com",
+                                        "role": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "User not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/update-user/{userId}": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update User Information",
+                "operationId": "2547ea33b33c2382748ec49dbc68d143",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of the user to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "role"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "User's name",
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "category": {
+                                        "description": "User's category",
+                                        "type": "string",
+                                        "example": "technology"
+                                    },
+                                    "role": {
+                                        "description": "User's role",
+                                        "type": "string",
+                                        "enum": [
+                                            "admin",
+                                            "user"
+                                        ],
+                                        "example": "admin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User information updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "success": "User information updated successfully"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Validation failed",
+                                    "details": {
+                                        "name": [
+                                            "The name field is required."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "User not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/list-user-favorites/{userId}": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List User's Favorite Articles",
+                "operationId": "c66415d0b14db3fc5f193e3815a17579",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of the user whose favorite articles to list",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of user's favorite articles",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "user": {
+                                        "id": 1,
+                                        "name": "John Doe",
+                                        "email": "john.doe@example.com",
+                                        "role": "admin"
+                                    },
+                                    "favorites": [
+                                        {
+                                            "id": 1,
+                                            "title": "Sample Article 1",
+                                            "url": "http://sample-article-1.com",
+                                            "author": "John Doe",
+                                            "description": "Lorem ipsum dolor sit amet.",
+                                            "imageUrl": "http://sample-article-1.com/image.jpg"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "title": "Sample Article 2",
+                                            "url": "http://sample-article-2.com",
+                                            "author": "Jane Doe",
+                                            "description": "Consectetur adipiscing elit.",
+                                            "imageUrl": "http://sample-article-2.com/image.jpg"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "User not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/delete-favorite/{favoriteId}": {
+            "delete": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Delete User's Favorite Article",
+                "operationId": "f1acb0647b6044d31e463379d84cd72b",
+                "parameters": [
+                    {
+                        "name": "favoriteId",
+                        "in": "path",
+                        "description": "ID of the favorite article to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article removed from favorites successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "success": "Article removed from favorites successfully"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, user not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Unauthorized, user not authenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized to remove this article from favorites",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Unauthorized to remove this article from favorites"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Favorite article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Favorite article not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/users/{userId}": {
+            "delete": {
+                "tags": [
+                    "Admin Users"
+                ],
+                "summary": "Delete a user",
+                "description": "Delete a user by their ID.",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of the user to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User deleted successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized to delete this user."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/list": {
+            "get": {
+                "tags": [
+                    "All News"
+                ],
+                "summary": "Get all news articles",
+                "description": "Fetches all news articles from the News API.",
+                "operationId": "getAllNewsArticles",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "author": {
+                                                "type": "string"
+                                            },
+                                            "publishedAt": {
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/comments": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create a new comment",
+                "description": "Create a new comment for the authenticated user.",
+                "operationId": "createComment",
+                "requestBody": {
+                    "description": "Comment data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "body",
+                                    "url"
+                                ],
+                                "properties": {
+                                    "body": {
+                                        "type": "string",
+                                        "example": "This is a comment body."
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://example.com/article"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment added successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Comment added successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/users/{userId}/comments": {
+            "get": {
+                "tags": [
+                    "User Comments"
+                ],
+                "summary": "Get comments for a specific user",
+                "description": "Retrieve a list of comments for a specific user.",
+                "operationId": "getUserComments",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of user comments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "body": {
+                                                "type": "string",
+                                                "example": "This is a user comment."
+                                            },
+                                            "url": {
+                                                "type": "string",
+                                                "example": "https://example.com/article"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/comments/{commentId}/edit": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Edit a comment",
+                "description": "Retrieve a comment for editing.",
+                "operationId": "editComment",
+                "parameters": [
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "ID of the comment to edit",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment for editing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "body": {
+                                            "type": "string",
+                                            "example": "This is a comment body."
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://example.com/article"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comment not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/comments/{commentId}": {
+            "put": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Update a comment",
+                "description": "Update the body of a comment.",
+                "operationId": "updateComment",
+                "parameters": [
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "ID of the comment to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated comment data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "body"
+                                ],
+                                "properties": {
+                                    "body": {
+                                        "type": "string",
+                                        "example": "Updated comment body."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Comment updated successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comment not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The body field is required."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "body": [
+                                                    "The body field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Delete a comment",
+                "description": "Delete a comment by its ID.",
+                "operationId": "deleteComment",
+                "parameters": [
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "ID of the comment to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment deleted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Comment deleted successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comment not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/articles/comments": {
+            "get": {
+                "tags": [
+                    "Article Comments"
+                ],
+                "summary": "View comments for an article",
+                "description": "Retrieve comments for a specific article.",
+                "operationId": "viewArticleComments",
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "URL of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Title of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of comments for the article",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "body": {
+                                                "type": "string",
+                                                "example": "This is a comment body."
+                                            },
+                                            "url": {
+                                                "type": "string",
+                                                "example": "https://example.com/article"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/favorite/create": {
+            "post": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Add an article to the user's favorites list",
+                "operationId": "b37e1220a837f2f716c2fe7fbfa5afe8",
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "The URL of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "The author of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "A brief description of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "imageUrl",
+                        "in": "query",
+                        "description": "URL of the article's image",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article added to favorites successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "message": "Article added to favorites!"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request, article already in favorites",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "This article is already in your favorites list!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, user not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Authentication required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/favorite/list": {
+            "get": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Get the list of user's favorite articles",
+                "operationId": "e79eb2acb501979a41fa42b094069003",
+                "responses": {
+                    "200": {
+                        "description": "List of user's favorite articles",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "favorites": [
+                                        {
+                                            "id": 1,
+                                            "title": "Sample Article 1",
+                                            "url": "http://sample-article-1.com",
+                                            "author": "John Doe",
+                                            "description": "Lorem ipsum dolor sit amet.",
+                                            "imageUrl": "http://sample-article-1.com/image.jpg"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "title": "Sample Article 2",
+                                            "url": "http://sample-article-2.com",
+                                            "author": "Jane Doe",
+                                            "description": "Consectetur adipiscing elit.",
+                                            "imageUrl": "http://sample-article-2.com/image.jpg"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, user not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Authentication required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/favorite/delete/{favorite}": {
+            "delete": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Delete a favorite article",
+                "operationId": "28aa003a86fef84eb3a0b77867ea8753",
+                "parameters": [
+                    {
+                        "name": "favorite",
+                        "in": "path",
+                        "description": "ID of the favorite article to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article removed from favorites successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "success": "Article removed from favorites!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, user not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Authentication required"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found, favorite article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Favorite article not found"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "error": "Internal Server Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/paginated": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Search for news articles",
+                "description": "Searches for news articles based on the provided parameters.",
+                "operationId": "searchAllNews",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "The search query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort option for the results",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "relevancy",
+                                "popularity",
+                                "publishedAt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language code for filtering results",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 2
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "author": {
+                                                "type": "string"
+                                            },
+                                            "publishedAt": {
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/fetch-searched-news": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Fetch searched news articles",
+                "description": "Fetches news articles based on the provided search parameters.",
+                "operationId": "fetchSearchedNews",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "The search query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort option for the results",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "relevancy",
+                                "popularity",
+                                "publishedAt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language code for filtering results",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 2
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Number of articles per page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "author": {
+                                                "type": "string"
+                                            },
+                                            "publishedAt": {
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/settings/show": {
+            "get": {
+                "tags": [
+                    "User Settings"
+                ],
+                "summary": "Get user settings",
+                "description": "Fetches the user's settings.",
+                "operationId": "getUserSettings",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "defaultCategory": {
+                                            "type": "string"
+                                        },
+                                        "articlesPerPage": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/settings/update": {
+            "post": {
+                "tags": [
+                    "User Settings"
+                ],
+                "summary": "Update user settings",
+                "description": "Updates the user's settings.",
+                "operationId": "updateUserSettings",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "defaultCategory": {
+                                        "type": "string",
+                                        "enum": [
+                                            "business",
+                                            "entertainment",
+                                            "general",
+                                            "health",
+                                            "science",
+                                            "sports",
+                                            "technology"
+                                        ]
+                                    },
+                                    "articlesPerPage": {
+                                        "type": "integer",
+                                        "minimum": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Settings updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/paginated": {
+            "get": {
+                "tags": [
+                    "Top News"
+                ],
+                "summary": "Get top news",
+                "description": "Fetches top news based on the specified category and country.",
+                "operationId": "getTopNews",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "The category of news (business, entertainment, health, science, sports, technology).",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "business",
+                                "entertainment",
+                                "health",
+                                "science",
+                                "sports",
+                                "technology"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "The country code for news filtering (e.g., 'us', 'gb', 'ca').",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 2
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "author": {
+                                                "type": "string"
+                                            },
+                                            "publishedAt": {
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
